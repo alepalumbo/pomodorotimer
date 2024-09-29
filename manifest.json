@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Pomodoro Timer",
+  "version": "1.0",
+  "description": "Pomodoro Timer with background execution and sound",
+  "permissions": ["alarms", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Pomodoro Timer"
+  },
+  "icons": {
+    "48": "icons/icon.png"
+  }
+}
