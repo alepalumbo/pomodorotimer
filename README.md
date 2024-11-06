@@ -1,6 +1,6 @@
-# Pomodoro Timer Browser Addon
+# Pomodoro Timer Browser Addon (v2.0)
 
-![Pomodoro Extension Screenshot](https://i.ibb.co/44Sykyx/screenshot.png)
+![Pomodoro Extension Screenshot](https://i.ibb.co/1RtTNnF/Screenshot-453.png)
 
 ## Overview
 
