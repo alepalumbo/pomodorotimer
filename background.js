@@ -1,26 +1,24 @@
 const browser = window.browser || window.chrome;
 let isRunning = false;
 let timerDuration = 30 * 60;
+let breakDuration = 5 * 60;
 let remainingTime = timerDuration;
 
 function startTimer() {
     if (!isRunning) {
         isRunning = true;
         browser.alarms.create('pomodoroTimer', { periodInMinutes: 1 / 60 });
-        console.log("Timer started!");
     }
 }
 
 function stopTimer() {
     browser.alarms.clear('pomodoroTimer');
     isRunning = false;
-    console.log("Timer stopped!");
 }
 
 function resetTimer() {
     stopTimer();
     remainingTime = timerDuration;
-    console.log("Timer reset to:", formatTime(remainingTime));
     updatePopup();
 }
 
@@ -31,6 +29,14 @@ function updatePopup() {
     });
 }
 
+function breakTimer() {
+    if (!isRunning) {
+        isRunning = true;
+        remainingTime = breakDuration;
+        browser.alarms.create('pomodoroTimer', { periodInMinutes: 1 / 60 });
+    }
+}
+
 function formatTime(seconds) {
     const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
@@ -38,12 +44,11 @@ function formatTime(seconds) {
 }
 
 browser.alarms.onAlarm.addListener((alarm) => {
-    if (alarm.name === 'pomodoroTimer' && remainingTime > 0) {
-        remainingTime--;
-        updatePopup();
-        console.log("Remaining Time:", remainingTime);
-
-        if (remainingTime === 0) {
+    if (alarm.name === 'pomodoroTimer') {
+        if (remainingTime > 0) {
+            remainingTime--;
+            updatePopup();
+        } else {
             playSound();
             stopTimer();
             alert("Pomodoro Finished!");
@@ -52,9 +57,8 @@ browser.alarms.onAlarm.addListener((alarm) => {
 });
 
 function playSound() {
-    const audio = new Audio('alarm.mp3');
-    audio.play();
-    console.log("Sound played");
+    const audio = new Audio('https://cdn.uppbeat.io/audio-files/57ef60eab5fd4218838423222dc07d99/e946ee9aeb53d44769a1526a318dd5dc/2de81a6197de7c652cc73f70cd03eeff/STREAMING-notification-action-needed-alert-single-fascinatedsound-1-00-02.mp3');
+    audio.play().catch(error => console.error("Errore nella riproduzione dell'audio:", error));
 }
 
 browser.runtime.onMessage.addListener((message) => {
@@ -64,5 +68,7 @@ browser.runtime.onMessage.addListener((message) => {
         stopTimer();
     } else if (message.action === 'reset') {
         resetTimer();
+    } else if (message.action === 'break') {
+        breakTimer();
     }
 });
