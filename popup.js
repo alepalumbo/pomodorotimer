@@ -3,25 +3,26 @@ let timer = document.getElementById("timer");
 let startBtn = document.getElementById("startBtn");
 let pauseBtn = document.getElementById("pauseBtn");
 let resetBtn = document.getElementById("resetBtn");
+let breakBtn = document.getElementById("breakBtn");
 
 function updateTimerDisplay(time) {
     timer.innerText = time;
-    console.log("Updated display:", time);
 }
 
 startBtn.addEventListener("click", () => {
     browser.runtime.sendMessage({ action: "start" });
-    console.log("Start button clicked");
 });
 
 pauseBtn.addEventListener("click", () => {
     browser.runtime.sendMessage({ action: "pause" });
-    console.log("Pause button clicked");
 });
 
 resetBtn.addEventListener("click", () => {
     browser.runtime.sendMessage({ action: "reset" });
-    console.log("Reset button clicked");
+});
+
+breakBtn.addEventListener("click", () => {
+    browser.runtime.sendMessage({ action: "break" });
 });
 
 browser.runtime.onMessage.addListener((message) => {
