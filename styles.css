@@ -1,11 +1,15 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Roboto;
     width: 120px;
     padding: 20px;
     text-align: center;
 }
 
-/* Buttons style with hovering */
+h3 {
+    color: rgb(192, 41, 41);
+}
+
+/* Buttons style */
 button {
     width: 80px;
     padding: 10px 20px;
@@ -13,46 +17,43 @@ button {
     border: none;
     border-radius: 5%;
     cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+    color: antiquewhite;
 }
 
 #startBtn {
     background-color: #E34234;
-    color: antiquewhite;
-}
-
-#startBtn:hover {
-    background-color: rgb(214, 102, 102);
-    color: antiquewhite;
 }
 
 #pauseBtn {
     background-color: rgb(0, 122, 120);
-    color: antiquewhite;
-}
-
-#pauseBtn:hover {
-    background-color: rgb(78, 126, 125);
-    color: antiquewhite;
 }
 
 #resetBtn {
     background-color: rgb(220, 184, 0);
-    color: antiquewhite;
-}
-
-#resetBtn:hover {
-    background-color: rgb(212, 190, 78);
-    color: antiquewhite;
 }
 
 #breakBtn {
     background-color: rgb(142, 142, 142);
-    color: antiquewhite;
 }
 
+/* Buttons style hovering */
+
+#startBtn:hover,
+#pauseBtn:hover,
+#resetBtn:hover,
 #breakBtn:hover {
-    background-color: rgb(161, 161, 161);
-    color: antiquewhite;
+    opacity: 0.8;
+}
+
+/* Buttons style active */
+
+#startBtn:active,
+#pauseBtn:active,
+#resetBtn:active,
+#breakBtn:active {
+    filter: brightness(80%);
 }
 
 /* Label text style */
